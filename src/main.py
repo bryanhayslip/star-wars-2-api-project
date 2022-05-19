@@ -46,8 +46,20 @@ def people():
     response = []
     for p in people: 
         response.append(p.serialize())
+
     return jsonify(response)
 
+@app.route('/planets', methods=['GET'])
+def planets():
+    planets = Planets.query.all()
+
+    response =  []
+    for p in response:
+        response.append(p.serialize())
+
+    return jsonify(response)
+
+    
 # @app.route('/people/<int:people_id>', methods=['GET'])
 # def get_people_id():
 #      json_text = jsonify(people.results.id)
@@ -59,10 +71,7 @@ def people():
 #     people.append(payload)
 #     return jsonify(people)
 
-# @app.route('/planets', methods=['GET'])
-# def get_planets():
-#      json_text = jsonify(planets)
-#      return json_text
+
 
 # @app.route('/planets', methods=['POST'])
 # def add_planets():
