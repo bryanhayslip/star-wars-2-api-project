@@ -17,3 +17,29 @@ class User(db.Model):
             "email": self.email,
             # do not serialize the password, its a security breach
         }
+
+class People(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), unique=True, nullable=False)
+    homeplanet_id = db.Column(db.Integer, db.ForeignKey('planets.id'))
+    homeplanet = db.relationship('Planets')
+
+    def __repr__(self):
+        return self.name
+
+class Planets(db.Model):
+     id = db.Column(db.Integer, primary_key=True)
+     name = db.Column(db.String(120), unique=True, nullable=False)
+
+     def __repr__(self):
+        return self.name
+
+class PeopleFavorites(db.Model):
+     id = db.Column(db.Integer, primary_key=True)
+     name = db.Column(db.String(120), unique=True, nullable=False)
+
+class PlanetsFavorites(db.Model):
+     id = db.Column(db.Integer, primary_key=True)
+     name = db.Column(db.String(120), unique=True, nullable=False)
+
+   

@@ -8,7 +8,7 @@ from flask_swagger import swagger
 from flask_cors import CORS
 from utils import APIException, generate_sitemap
 from admin import setup_admin
-from models import db, User
+from models import db, User, People, PeopleFavorites, Planets, PlanetsFavorites
 #from models import Person
 
 app = Flask(__name__)
@@ -38,6 +38,42 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
+@app.route('/people', methods=['GET'])
+def people():
+    people = People.query.all()
+
+    response = []
+    for p in people: 
+        response.append(p.serialize())
+    return jsonify(response)
+
+# @app.route('/people/<int:people_id>', methods=['GET'])
+# def get_people_id():
+#      json_text = jsonify(people.results.id)
+#      return json_text
+
+# @app.route('/people', methods=['POST'])
+# def add_people():
+#     payload = request.get_json(force=True)
+#     people.append(payload)
+#     return jsonify(people)
+
+# @app.route('/planets', methods=['GET'])
+# def get_planets():
+#      json_text = jsonify(planets)
+#      return json_text
+
+# @app.route('/planets', methods=['POST'])
+# def add_planets():
+#     payload = request.get_json(force=True)
+#     planets.append(payload)
+#     return jsonify(planets)
+
+# @app.route('/users', methods=['GET'])
+# def get_users():
+#      json_text = jsonify(users)
+#      return json_text
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
