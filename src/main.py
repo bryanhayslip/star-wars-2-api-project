@@ -54,7 +54,7 @@ def planets():
     planets = Planets.query.all()
 
     response =  []
-    for p in response:
+    for p in planets:
         response.append(p.serialize())
 
     return jsonify(response)
